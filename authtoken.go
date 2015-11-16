@@ -6,8 +6,6 @@ import (
   "fmt"
   "net"
   "net/http"
-
-  "golang.org/x/net/context"
 )
 
 // FromRequest extracts the auth token from req.
