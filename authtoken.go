@@ -1,6 +1,6 @@
 // Package auth provides functions for extracting a user Auth token from a
 // request and associating it with a Context.
-package usertoken
+package authtoken
 
 import (
   "fmt"
@@ -12,8 +12,7 @@ import (
 
 // FromRequest extracts the auth token from req.
 func FromRequest(req *http.Request) (string, error) {
-  var userToken string
-
+  // Grab the raw Authoirzation header
   authHeader, err := req.Header.Get("Authorization")
   if err != nil {
     return nil, errors.New("Authorization header required")
@@ -32,9 +31,8 @@ func FromRequest(req *http.Request) (string, error) {
       return nil, errors.New("Base64 encoding issue")
     }
     creds := strings.Split(string(str), ":")
-    userToken = creds[0]
+    return creds[0], nil
   } else {
-    userToken = authHeader[len(BEARER_SCHEMA):]
+    return authHeader[len(BEARER_SCHEMA):], nil
   }
-  return userToken, nil
 }
