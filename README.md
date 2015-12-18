@@ -1,6 +1,6 @@
 # authtoken
 
-Used to extract the Authorization tokend from request headers.
+Extract the token from request Authorization headers.
 
 ```go
 // get token from Authorization header from *http.Request
